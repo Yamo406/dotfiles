@@ -1,0 +1,3 @@
+This directory will contain my dotfiles i.e. configs, what I use, etc...
+
+Enjoy <3
