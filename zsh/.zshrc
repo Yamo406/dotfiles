@@ -193,8 +193,17 @@ alias ls='ls -G'
 alias flatpak-u="$HOME/scripts/flatpak.sh"
 alias cleanup="$HOME/scripts/cleanup.sh"
 alias bluetoothRestart="$HOME/scripts/bluetoothRestart.sh"
-alias dotsync="git -C /run/media/yamo/dev/dotfiles add . && git -C ~/run/media/yamo/dev/dotfiles commit -m 'sync' && git -C /run/media/yamo/dev/dotfiles push"
+alias dotsync="git -C /run/media/yamo/dev/dotfiles add . && git -C /run/media/yamo/dev/dotfiles commit -m 'sync' && git -C /run/media/yamo/dev/dotfiles push"
 
+# Git Shell Aliases
+alias g="git"
+alias gs="git status"
+alias ga="git add -A ."
+alias gc="git commit -m"
+alias gpsh="git push"
+alias gpll="git pull"
+alias gcout="git checkout"
+alias gbr="git branch"
 
 # Shopify Hydrogen alias to local projects
 alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
