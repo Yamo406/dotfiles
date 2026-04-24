@@ -19,15 +19,11 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.5',
+    'nvim-telescope/telescope.nvim',  tag = '0.1.5',
     -- or                            , branch = '0.1.x',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  use {
-    'uloco/bluloco.nvim',
-    requires = { 'rktjmp/lush.nvim' }
-  }
   use( 'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
   use( 'nvim-treesitter/playground')
   use( 'mbbill/undotree')
@@ -36,10 +32,20 @@ return require('packer').startup(function(use)
   use( 'nvim-lua/plenary.nvim')
   use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
   use( 'nvim-tree/nvim-web-devicons')
+  use ('ray-x/go.nvim')
+  use ('ray-x/guihua.lua')
+
+--  use({
+	--"L3MON4D3/LuaSnip",
+	-- follow latest release.
+	--tag = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+	-- install jsregexp (optional!:).
+	--run = "make install_jsregexp"
+--})
 
   use {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v1.x',
+    branch = 'v3.x',
     requires = {
       -- LSP Support
       {'neovim/nvim-lspconfig'},             -- Required

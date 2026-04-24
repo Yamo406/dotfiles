@@ -4,36 +4,85 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-export VAGRANT_HOME=/run/media/yamo/Main/.Vagrant.d/
+export VAGRANT_HOME=/run/media/yamo/dev/.Vagrant.d/
+
+export MANPAGER='nvim +Man!'
+
+# keybindings
+clear-terminal() { tput reset; zle redisplay; }
+zle -N clear-terminal
+bindkey "^e" clear-terminal
+# bindkey "^e" clear-screen
+
+fuzzy-history() {
+  local selected_command=$(history -n 1 | fzf --height 40% --reverse --query="$LBUFFER")
+  
+  if [ -n "$selected_command" ]; then
+    LBUFFER="$selected_command"
+  fi
+  
+  zle redisplay
+}
+
+zle -N fuzzy-history
+bindkey "^r" fuzzy-history
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="jnrowe" # set by `omz`
+# ZSH_THEME="jnrowe" # set by `omz`
+ZSH_THEME="ZenBlue" 
 
 # Set up Node Version Manager
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
+
+# git configuration
+autoload -Uz compinit && compinit
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+RPROMPT='${vcs_info_msg_0_}'
+# PROMPT='${vcs_info_msg_0_}%# '
+zstyle ':vcs_info:git:*' formats '%b'
+
 # place this after nvm initialization!
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
+# autoload -U add-zsh-hook
+#load-nvmrc() {
+#  local node_version="$(nvm version)"
+#  local nvmrc_path="$(nvm_find_nvmrc)"
+#
+#  if [ -n "$nvmrc_path" ]; then
+#    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+#
+#    if [ "$nvmrc_node_version" = "N/A" ]; then
+#      nvm install
+#    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+#      nvm use
+#    fi
+#  elif [ "$node_version" != "$(nvm version default)" ]; then
+#    echo "Reverting to nvm default version"
+#    nvm use default
+#  fi
+#}
+#add-zsh-hook chpwd load-nvmrc
+#load-nvmrc
 
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+#Enable spell checker
+setopt correct
+#Setup prompt
+export SPROMPT="Correct %R to %r? [Yes, No, Abort, Edit] "
+#Set Color
+export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? [Yes, No, Abort, Edit] "
 
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# 256 color
+export TERM=xterm-256color
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -59,7 +108,7 @@ load-nvmrc
 # DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
- DISABLE_LS_COLORS="true"
+ # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -94,9 +143,6 @@ load-nvmrc
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -124,12 +170,46 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-#Enable spell checker
-setopt correct
-#Setup prompt
-export SPROMPT="Correct %R to %r? [Yes, No, Abort, Edit] "
-#Set Color
-export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? [Yes, No, Abort, Edit] "
 
-# 256 color
-export TERM=xterm-256color
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export CLICOLOR=1
+export LSCOLORS=gxFxCxDxBxegedabagaced
+
+export NPM_GLOBAL="$HOME/.npm-global"
+export PATH="$NPM_GLOBAL/bin:$PATH"
+export PATH=~/.npm-global/bin:$PATH
+export PATH=$PATH:$(go env GOPATH)/bin
+
+
+
+
+# Aliases
+alias dev='cd /run/media/yamo/dev'
+alias storage='cd /run/media/yamo/storage/'
+alias edu='cd /run/media/yamo/edu/'
+alias grind='cd /run/media/yamo/storage/grind'
+alias dotfiles="cd /run/media/yamo/dev/dotfiles"
+alias ls='ls -G'
+alias flatpak-u="$HOME/scripts/flatpak.sh"
+alias cleanup="$HOME/scripts/cleanup.sh"
+alias bluetoothRestart="$HOME/scripts/bluetoothRestart.sh"
+alias dotsync="git -C /run/media/yamo/dev/dotfiles add . && git -C ~/run/media/yamo/dev/dotfiles commit -m 'sync' && git -C /run/media/yamo/dev/dotfiles push"
+
+
+# Shopify Hydrogen alias to local projects
+alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
+
+alias pn=pnpm
+
+# pnpm
+export PNPM_HOME="/home/yamo/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export FFMPEG_PATH=/usr/bin/ffmpeg

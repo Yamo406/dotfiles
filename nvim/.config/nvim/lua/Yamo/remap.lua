@@ -17,6 +17,6 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 -- yank to the system clipboard
 vim.keymap.set({"n", "v"}, "<leader>y", "\"+y")
-vim.keymap.set("n", "<leaderY", "\"+Y")
+vim.keymap.set("n", "<leader>Y", "\"+Y")
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {silent = true})
