@@ -9,7 +9,7 @@ local lsp = require('lsp-zero').preset({
 -- Setup mason first
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = { 'lua_ls', 'tsserver' }, -- add your preferred servers here
+  ensure_installed = { 'lua_ls', 'ts_ls', 'gopls'}, -- add your preferred servers here
   handlers = {
     -- This function is called for each server installed by mason-lspconfig
     -- It ensures that lsp-zero's default setup (which includes keymaps, etc.)
@@ -21,6 +21,9 @@ require('mason-lspconfig').setup({
     -- This is where you put server-specific settings.
     lua_ls = function()
       local lspconfig = require('lspconfig')
+      lspconfig.ts_ls.setup({
+    -- your existing config (on_attach, capabilities, etc.)
+})
       lspconfig.lua_ls.setup(lsp.nvim_lua_ls()) -- Use lsp.nvim_lua_ls() for Neovim-specific settings
       lspconfig.gopls.setup({
         settings = {

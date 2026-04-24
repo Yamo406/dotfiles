@@ -32,7 +32,8 @@ bindkey "^r" fuzzy-history
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="jnrowe" # set by `omz`
-ZSH_THEME="ZenBlue" 
+#ZSH_THEME="ZenBlue" 
+ZSH_THEME="zenblue" 
 
 # Set up Node Version Manager
 # source /usr/share/nvm/init-nvm.sh
@@ -169,8 +170,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -183,9 +182,6 @@ export NPM_GLOBAL="$HOME/.npm-global"
 export PATH="$NPM_GLOBAL/bin:$PATH"
 export PATH=~/.npm-global/bin:$PATH
 export PATH=$PATH:$(go env GOPATH)/bin
-
-
-
 
 # Aliases
 alias dev='cd /run/media/yamo/dev'
