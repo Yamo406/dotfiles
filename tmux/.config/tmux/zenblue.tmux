@@ -118,7 +118,7 @@ set -g message-command-style "bg=#000520,fg=#2ec0ff"
 #  color — to signal you are in a special mode.
 # =============================================================================
 
-set -g mode-style "bg=#0e3672,fg=#ffe4c2,bold"
+set -g mode-style "bg=#0e3672,fg=#edf9b1"
 
 
 # =============================================================================
