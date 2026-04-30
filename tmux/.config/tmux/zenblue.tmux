@@ -108,7 +108,7 @@ set -g pane-border-status off
 #  (#000520), mirroring the function/decorator color used in syntax.
 # =============================================================================
 
-set -g message-style "bg=#000520,fg=#00eeff,bold"
+set -g message-style "bg=#000520,fg=#2ec0ff"
 set -g message-command-style "bg=#000520,fg=#2ec0ff"
 
 

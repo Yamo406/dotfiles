@@ -26,7 +26,7 @@ local palette = {
   accent = "#007ce2",
   
   -- Syntax token colors
-  comment = "#4b5563",
+  comment = "#3a5580",
   variable = "#EDF9B1",
   keyword = "#006EFF",
   operator = "#2EC0FF",
